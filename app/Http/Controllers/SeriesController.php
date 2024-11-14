@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Serie;
+use App\Http\Requests\SeriesFormRequest;
+use App\Models\Series;
+use App\Repository\SeriesRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class SeriesController extends Controller
 {
-    public function index()
-    {
-        $series = Serie::query()->orderBy('nome')->get();
+    public function __construct(private SeriesRepository $repository) {}
 
-        return view('series.index')->with('series', $series);
+    public function index(Request $request)
+    {
+        $series = Series::all();
+        $mensagemSucesso = session('mensagem.sucesso');
+
+        return view('series.index')->with('series', $series)->with('mensagemSucesso', $mensagemSucesso);
     }
 
     public function create()
@@ -20,13 +24,35 @@ class SeriesController extends Controller
         return view('series.create');
     }
 
-    public function store(Request $request)
+    public function store(SeriesFormRequest $request)
     {
-        $nomeSerie = $request->input('nome');
-        $serie = new Serie();
-        $serie->nome = $nomeSerie;
-        $serie->save();
 
-        return redirect('/series');
+        $serie = $this->repository->add($request);
+
+        return to_route('series.index')->with('mensagem.sucesso', "Série '$serie->nome' adicionada com sucesso!");
+    }
+
+
+    public function destroy(Series $series)
+    {
+        $series->delete();
+
+        return to_route('series.index')
+            ->with('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso");
+    }
+
+    //series/{series}/edit
+    public function edit(Series $series)
+    {
+        return view('series.edit')->with('serie', $series);
+    }
+
+    //series/{series}
+    public function update(Series $series, SeriesFormRequest $request)
+    {
+        $series->fill($request->all());
+        $series->save();
+
+        return to_route('series.index')->with('mensagem.sucesso', "Série '$series->nome' atualizada com sucesso!");
     }
 }
