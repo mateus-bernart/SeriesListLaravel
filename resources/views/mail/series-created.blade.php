@@ -2,6 +2,8 @@
 
 # {{$nomeSerie}} criada
 
+@image('storage/'.$coverPath)
+
 A série {{$nomeSerie}} com {{$qtdTemporadas}} temporadas e {{$episodiosPorTemporada}} episódios foi criada com sucesso.
 
 Acesse aqui:

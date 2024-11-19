@@ -6,7 +6,6 @@ use App\Events\SeriesCreated as SeriesCreatedEvent;
 use App\Mail\SeriesCreated;
 use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -37,7 +36,7 @@ class EmailUsersAboutSeriesCreated implements ShouldQueue
                 $event->seriesName,
                 $event->seriesId,
                 $event->seriesSeasonsQty,
-                $event->seriesEpisodesPerSeason,
+                $event->seriesEprSeason,
             );
 
             $when = now()->addSeconds($index * 5);

@@ -6,12 +6,15 @@ use App\Http\Requests\SeriesFormRequest;
 use App\Models\Episode;
 use App\Models\Season;
 use App\Models\Series;
+use Error;
+use Faker\Core\Number;
 use Illuminate\Support\Facades\DB;
 
 class EloquentSeriesRepository implements SeriesRepository
 {
     public function add(SeriesFormRequest $request): Series
     {
+
         return DB::transaction(function () use ($request) {
             $serie = Series::create([
                 'nome' => $request->nome,
@@ -36,7 +39,6 @@ class EloquentSeriesRepository implements SeriesRepository
                 }
             }
             Episode::insert($episodes);
-
             return $serie;
         });
     }

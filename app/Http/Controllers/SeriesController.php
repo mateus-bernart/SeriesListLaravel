@@ -7,6 +7,7 @@ use App\Events\SeriesCreated;
 use App\Models\Series;
 use App\Repositories\SeriesRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SeriesController extends Controller
 {
@@ -32,8 +33,9 @@ class SeriesController extends Controller
     public function store(SeriesFormRequest $request)
     {
 
-        $coverPath = $request->file('cover')
-            ->store('series_cover', 'public');
+        $coverPath = $request->hasFile('cover')
+            ? $request->file('cover')->store('series_cover', 'public')
+            : null;
 
         $request->coverPath = $coverPath;
 
@@ -54,6 +56,11 @@ class SeriesController extends Controller
     {
         $series->delete();
 
+        //excluir imagem do disco
+        if ($series->cover) {
+            Storage::disk('public')->delete($series->cover);
+        }
+        
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso");
     }

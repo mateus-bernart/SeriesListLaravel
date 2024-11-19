@@ -6,10 +6,18 @@
     <ul class="list-group">
         @foreach ($series as $serie)
         <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                @if ($serie->cover)
+                    <img src="{{asset('storage/' . $serie->cover)}}" alt="" width="100" class="img-thumbnail me-3">
+                @else
+                    <img src="{{asset('storage/sem-imagem.png')}}" alt="" width="100" class="img-thumbnail me-3">
+                @endif
 
-            @auth <a href="{{ route('seasons.index', $serie->id) }}"> @endauth
-                {{ $serie->nome }}
-            @auth </a> @endauth
+                @auth <a href="{{ route('seasons.index', $serie->id) }}"> @endauth
+                    {{ $serie->nome }}
+                @auth </a> @endauth
+            </div>
+
 
             @auth
             <span class="d-flex">

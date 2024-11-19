@@ -15,7 +15,7 @@
 
             <div class="col-2">
                 <label for="seasonsQty" class="form-label">Nº Temporadas:</label>
-                <input type="text"
+                <input type="number"
                        id="seasonsQty"
                        name="seasonsQty"
                        class="form-control"
@@ -24,7 +24,7 @@
 
             <div class="col-2">
                 <label for="episodesPerSeason" class="form-label">Eps / Temporada:</label>
-                <input type="text"
+                <input type="number"
                        id="episodesPerSeason"
                        name="episodesPerSeason"
                        class="form-control"
