@@ -60,7 +60,7 @@ class SeriesController extends Controller
         if ($series->cover) {
             Storage::disk('public')->delete($series->cover);
         }
-        
+
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso");
     }
