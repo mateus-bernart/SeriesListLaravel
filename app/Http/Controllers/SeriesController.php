@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
 use App\Events\SeriesCreated;
+use App\Jobs\DeleteSeriesCover;
 use App\Models\Series;
 use App\Repositories\SeriesRepository;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -54,12 +56,11 @@ class SeriesController extends Controller
 
     public function destroy(Series $series)
     {
+
         $series->delete();
 
-        //excluir imagem do disco
-        if ($series->cover) {
-            Storage::disk('public')->delete($series->cover);
-        }
+        //excluir imagem do disco com Jobs e Eventos
+        DeleteSeriesCover::dispatch($series->cover);
 
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso");
