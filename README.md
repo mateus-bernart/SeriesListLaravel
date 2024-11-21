@@ -65,3 +65,6 @@
 -   php artisan migrate
 -   php artisan serve
 -   Generate APP Key
+
+/login
+/series
