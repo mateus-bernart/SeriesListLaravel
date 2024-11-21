@@ -1,64 +1,67 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Sistema de Séries Web Fullstack com Laravel
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### Conhecimentos utilizados
 
-## About Laravel
+-   Utilização de Componentes com Blades
+-   -   Bootstrap (Mix Laravel)
+-   Seeders (criadores de dados para inserir no db)
+-   Factories (Formas de criar os dados falsos)
+-   Migrations (Versionamento do db)
+-   ORM Eloquent
+-   Rotas Nomeadas (não precisar modificar a url) / Manutenção
+-   -   Padrões de nomenclatura (create, index, store, destroy, view)
+-   Parametrização nas rotas (->with)
+-   Flash messages (só duram uma sessão)
+-   Injeção de dependências
+-   Mass assignment (fill e atributo fillable)
+-   Aplicar regras de validação com classe de FormRequest
+-   Relacionamento (Has Many, belongs to)
+-   Bulk insert (Insere diversos episódios e temporadas na série com 1 query)
+-   -   Eager Loading
+-   -   Problema N + 1
+-   Transactions (versionamento de modificações no db)
+-   Interfaces e Repository
+-   -   Service Container (Classe que sabe ligar com as outras classes, a partir de "receitas" que fornecemos a ele).
+-   -   Binds
+-   -   Service Providers (Interagem com Service Containers, definindo as ações das funções dos containers)
+-   Middlewares
+-   Breeze (Login)
+-   Envio de emails
+-   Event Listeners (Após criar o model, poderá ter diversos eventos (email, sms, log))
+-   -   Processamento assíncrono
+-   -   Filas (queue)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Autenticação API
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   Através de middlewares (Verificam antes de chegar ao Controller)
+-   Token JWT (Cookies)
+-   Stateless
+-   Laravel Sanctum
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Autorização API
 
-## Learning Laravel
+-   Auth (Sanctum middleware)
+-   createToken, tokenCan
+-   Revogar tokens (não tem logout)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### API (REST)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   HATEOAS (Hypermedia as the engine of the Application State)
+-   CRUD
+-   Autorização e Autenticação
 
-## Laravel Sponsors
+### Segurança da aplicação
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+-   Sql Injection
+-   Timing attacks
+-   Cross-site Scripting (XSS) e @CSRF
 
-### Premium Partners
+### Para iniciar o projeto:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   npm install
+-   composer update/composer install
+-   .env -> banco de dados que utilizará
+-   npm run dev/mix
+-   php artisan migrate
+-   php artisan serve
+-   Generate APP Key
