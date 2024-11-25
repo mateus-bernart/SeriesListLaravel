@@ -43,6 +43,7 @@ class SeriesController extends Controller
 
         $serie = $this->repository->add($request);
 
+        // Envia o email com os dados da série.
         SeriesCreated::dispatch(
             $serie->nome,
             $serie->id,

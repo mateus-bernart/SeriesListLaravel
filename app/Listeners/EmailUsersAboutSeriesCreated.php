@@ -36,7 +36,7 @@ class EmailUsersAboutSeriesCreated implements ShouldQueue
                 $event->seriesName,
                 $event->seriesId,
                 $event->seriesSeasonsQty,
-                $event->seriesEprSeason,
+                $event->seriesEpisodesPerSeason,
             );
 
             $when = now()->addSeconds($index * 5);
