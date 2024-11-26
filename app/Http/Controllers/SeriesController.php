@@ -72,7 +72,7 @@ class SeriesController extends Controller
         return view('series.edit')->with('serie', $series);
     }
 
-    public function update(Series $series, SeriesFormRequest $request)
+    public function update(Series $series, Request $request)
     {
         $series->fill($request->all());
         $series->save();

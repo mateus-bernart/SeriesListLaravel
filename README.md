@@ -62,6 +62,7 @@
 -   composer update/composer install
 -   .env -> banco de dados que utilizará
 -   npm run dev/mix
+-   php artisan storage:link (cria um link para a pasta de imagens (cover_path) local)
 -   php artisan migrate
 -   php artisan serve
 -   Generate APP Key
