@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SeriesFormRequest;
-use App\Events\SeriesCreated;
 use App\Jobs\DeleteSeriesCover;
 use App\Models\Series;
 use App\Repositories\SeriesRepository;
-use Illuminate\Contracts\Auth\Authenticatable;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class SeriesController extends Controller
 {
@@ -44,12 +42,12 @@ class SeriesController extends Controller
         $serie = $this->repository->add($request);
 
         // Envia o email com os dados da série.
-        SeriesCreated::dispatch(
-            $serie->nome,
-            $serie->id,
-            $request->seasonsQty,
-            $request->episodesPerSeason
-        );
+        // SeriesCreated::dispatch(
+        //     $serie->nome,
+        //     $serie->id,
+        //     $request->seasonsQty,
+        //     $request->episodesPerSeason
+        // );
 
         return to_route('series.index')
             ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
@@ -60,7 +58,7 @@ class SeriesController extends Controller
 
         $series->delete();
 
-        //excluir imagem do disco com Jobs e Eventos
+        //excluir imagem do disco com Event Listener
         DeleteSeriesCover::dispatch($series->cover);
 
         return to_route('series.index')

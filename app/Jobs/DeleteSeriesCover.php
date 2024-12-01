@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -14,14 +13,16 @@ class DeleteSeriesCover implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    private string $seriesCoverPath;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(private readonly string $seriesCoverPath)
+    public function __construct($seriesCoverPath)
     {
-        //
+        $this->seriesCoverPath = $seriesCoverPath;
     }
 
     /**
